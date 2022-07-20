@@ -1,0 +1,37 @@
+import socket
+import threading
+import sys
+
+host = input('Enter a remote host to scan: ')
+hostIP = socket.gethostbyname(host)
+
+
+print('Scanning remote host', hostIP)
+
+
+def scanner(port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((hostIP,port))
+        print(f"Port {port} is open")
+    except:
+        pass
+
+
+for port in range(1, 65536):
+    thread = threading.Thread(target = scanner, args=[port])
+    thread.start()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
